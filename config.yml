@@ -1,0 +1,5 @@
+development:
+  access_token: "bba1c16d5423c9c0eeb82b0829eb55ab"
+  store: "little-moneky.myshopify.com"
+  bucket_size: 40
+  refill_rate: 2

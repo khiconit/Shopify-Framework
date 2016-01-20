@@ -1,0 +1,65 @@
+{% assign brand_title = settings.brand_title %}
+{% assign brand_dumyimage = settings.brand_dumyimage %}
+<div id="our-brand" class="brand-carousel">
+	<div class="brand-heading">
+		<h2> {{ brand_title | strip_html }}</h2>
+	</div>
+	<div id="{% include 'shortcode-render' render:'id' default:'brand-slider' %}">
+		{% for vendor in shop.vendors %}
+		<div class="item-brand">
+		    {% capture first_char %}{{ vendor | truncate: 1, '' }}{% endcapture %}
+			{%  assign handle_vendor = vendor | handleize %}
+	    	{% assign collection  = collections[handle_vendor] %}
+	    	{% if collection.handle  !=""  %}
+				<a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image" alt="{{ collection.title}}">
+		            {% if collection.image %}
+		              {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+		            {% else %}
+		              {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+		            {% endif %}
+		        </a>
+		      {% else %}
+		      	{% if brand_dumyimage %}
+					<a href="#" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image" alt="Vendor product">
+			             {{ 'http://dummyimage.com/205x95&text=' | append: first_char | img_tag }}
+			        </a>
+		        {% endif %}
+	        {% endif %}
+	        </div>
+		{% endfor %}
+	</div>
+</div>
+
+<script>
+$(function(){
+	"use strict";
+	jQuery(document).ready(function($) {
+		$("#{% include 'shortcode-render' render:'id' default:'brand-slider' %}").owlCarousel({
+ 
+		    // Most important owl features
+		    items : {% include 'shortcode-render' render:'cols' default: settings.brand_items %},
+		    itemsDesktop : [1199,{{settings.brand_itemsDesktop}}],
+		    itemsTablet: [768,{{settings.brand_itemsTablet}}],
+		    itemsMobile : [479,{{settings.brand_itemsMobile}}],
+		  
+		    //Basic Speeds
+		    slideSpeed : {{settings.brand_speed}},
+		    paginationSpeed : {{settings.brand_speed}},
+		    rewindSpeed : {{settings.brand_speed}},
+		 
+		    //Autoplay
+		    autoPlay : {{settings.brand_autoplay}},
+		    stopOnHover : false,
+		    // Navigation
+		    navigation : {{settings.brand_navigation}},
+		    navigationText : ["prev","next"],
+		    rewindNav : true,
+		    scrollPerPage : false,
+		    //Pagination
+		    pagination : {{settings.brand_pagination}},
+		    paginationNumbers: false,
+		  
+			});
+	});
+ });
+</script>

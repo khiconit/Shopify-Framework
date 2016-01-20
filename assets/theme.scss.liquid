@@ -1,0 +1,576 @@
+/*============================================================================
+  Launchpad Star | A theme by Shopify
+  Built on Timber v2.0.0
+==============================================================================*/
+
+/*================ Variables, theme settings, and Sass mixins from Timber ================*/
+/*================ Global | Sass Mixins ================*/
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both; }
+  *zoom: 1;
+}
+
+@mixin prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+@mixin transition($transition: 0.1s all) {
+  @include prefix('transition', #{$transition});
+}
+
+@mixin transform($transform: 0.1s all) {
+  @include prefix('transform', #{$transform});
+}
+
+@mixin animation($animation) {
+  -webkit-animation: $animation;
+  -moz-animation:    $animation;
+  -o-animation:      $animation;
+  animation:         $animation;
+}
+
+@mixin gradient($from, $to, $fallback) {
+  background: $fallback;
+  background: -moz-linear-gradient(top, $from 0%, $to 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+  background: -webkit-linear-gradient(top, $from 0%, $to 100%);
+  background: -o-linear-gradient(top, $from 0%, $to 100%);
+  background: -ms-linear-gradient(top, $from 0%, $to 100%);
+  background: linear-gradient(top bottom, $from 0%, $to 100%);
+}
+
+@mixin backface($visibility: hidden) {
+  @include prefix('backface-visibility', #{$visibility});
+}
+
+@mixin visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+@mixin desaturate {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+@mixin box-sizing($box-sizing: border-box) {
+  -webkit-box-sizing: #{$box-sizing};
+  -moz-box-sizing: #{$box-sizing};
+  box-sizing: #{$box-sizing};
+}
+
+@function em($target, $context: $baseFontSize) {
+  @if $target == 0 {
+    @return 0;
+  }
+  @return $target / $context + 0em;
+}
+
+@function color-control($color) {
+  @if (lightness( $color ) > 50) {
+    @return #000;
+  }
+  @else {
+    @return #fff;
+  }
+}
+
+/*============================================================================
+  Dependency-free breakpoint mixin
+    - http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
+==============================================================================*/
+$min: min-width;
+$max: max-width;
+@mixin at-query ($constraint, $viewport1, $viewport2:null) {
+  @if $constraint == $min {
+    @media screen and ($min: $viewport1) {
+      @content;
+    }
+  } @else if $constraint == $max {
+    @media screen and ($max: $viewport1) {
+      @content;
+    }
+  } @else {
+    @media screen and ($min: $viewport1) and ($max: $viewport2) {
+      @content;
+    }
+  }
+}
+
+/*============================================================================
+  Accent text
+==============================================================================*/
+
+@mixin accentFontStack {
+  font-size: em($accentFontSize);
+  font-family: $accentFontStack;
+  font-weight: $accentFontWeight;
+  font-style: normal;
+}
+
+$siteWidth: 1030px;
+$gutter: 30px;
+$gridGutter: 30px;
+$radius: 2px;
+
+/*================ Color variables ================*/
+$colorPrimary: {{ settings.color_primary }};
+$colorSecondary: {{ settings.color_secondary }};
+
+// Button colors
+$colorBtnPrimary: $colorPrimary;
+$colorBtnPrimaryHover: lighten($colorBtnPrimary, 10%);
+$colorBtnPrimaryActive: darken($colorBtnPrimaryHover, 10%);
+$colorBtnPrimaryText: {{ settings.color_button_primary_text }};
+
+$colorBtnSecondary: $colorSecondary;
+$colorBtnSecondaryHover: lighten($colorBtnSecondary, 10%);
+$colorBtnSecondaryActive: darken($colorBtnSecondaryHover, 10%);
+$colorBtnSecondaryText: {{ settings.color_button_secondary_text }};
+
+$colorBtnTertiary: {{ settings.color_body_bg }};
+$colorBtnTertiaryHover: $colorPrimary;
+$colorBtnTertiaryActive: darken($colorPrimary, 10%);
+$colorBtnTertiaryText: $colorPrimary;
+
+// Text link colors
+$colorLink: $colorPrimary;
+$colorLinkHover: lighten($colorPrimary, 15%);
+
+// Text colors
+$colorTextBody: {{ settings.color_body_text }};
+$colorTopBarText: $colorTextBody;
+
+// Backgrounds
+$colorBody: {{ settings.color_body_bg }};
+$colorHeader: $colorBody;
+$colorTopBar: $colorBody;
+
+// Border colors
+$colorBorder: {{ settings.color_borders }};
+
+// Nav and dropdown link background
+$colorNavText: $colorTextBody;
+
+// Site Footer
+$colorFooterBg: $colorBody;
+$colorFooterText: $colorTextBody;
+
+// Helper colors
+$disabledGrey: #f6f6f6;
+$disabledBorder: darken($disabledGrey, 25%);
+$errorRed: #d02e2e;
+$errorRedBg: #fff6f6;
+$successGreen: #56ad6a;
+$successGreenBg: #ecfef0;
+
+// Password page
+$passwordPageUseBgImage: true;
+
+/*================ Typography variables ================*/
+{% if settings.type_base_family contains 'Google' %}
+  {% assign type_base_parts = settings.type_base_family | split: '_' %}
+  {% assign type_base_name = type_base_parts[1] %}
+  {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+{% else %}
+  {% assign base_family = settings.type_base_family %}
+{% endif %}
+
+{% if settings.type_header_family contains 'Google' %}
+  {% assign type_header_parts = settings.type_header_family | split: '_' %}
+  {% assign type_header_name = type_header_parts[1] %}
+  {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign header_weight = type_header_parts[2] %}
+{% else %}
+  {% assign header_family = settings.type_header_family %}
+  {% assign header_weight = 700 %}
+{% endif %}
+
+{% if settings.type_accent_family contains 'Google' %}
+  {% assign type_accent_parts = settings.type_accent_family | split: '_' %}
+  {% assign type_accent_name = type_accent_parts[1] %}
+  {% capture accent_family %}"{{ type_accent_name | split: ':' | first | replace: '+', ' ' }}"{% if type_accent_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign accent_weight = type_accent_parts[2] %}
+{% else %}
+  {% assign accent_family = settings.type_accent_family %}
+  {% assign accent_weight = 400 %}
+{% endif %}
+
+// Body Font
+$bodyFontStack: {{ base_family }};
+$baseFontSize: {{ settings.type_base_size }};
+
+// Header Font
+$headerFontStack: {{ header_family }};
+$headerFontWeight: {{ header_weight }};
+$headerBaseFontSize: {{ settings.type_header_size }};
+
+// Navigation and buttons
+$accentFontStack: {{ accent_family }};
+$accentFontWeight: {{ accent_weight }};
+$accentFontSize: {{ settings.type_accent_size }};
+
+
+/*================ Menu By Litter Little Monkey ================*/
+$menu_sticky: {{ settings.menu_sticky }}; //if menu sticky ==true  then menu will fixed in top
+$menu_use_animation:  {{ settings.menu_use_animation }}; //Enable use animate css
+$menu_type_animation:  {{ settings.menu_type_animation }};//Choose type animate
+$menu_number_lever: {{ settings.menu_number_lever }}; //Number lever of menu default 2
+$menu_color_primary:  {{ settings.menu_color_primary }}; //Text color menu lever 1
+$menu_color_primary_active: {{ settings.menu_color_primary_active }}; //Text color lever 1 when hover
+$menu_background_color: {{ settings.menu_background_color }}; //Background color menu lever 1
+$menu_background_color_active: {{ settings.menu_background_color_active }};//Menu background color when hover
+{% if settings.menu_use_background_image %}
+$menu_background_image: "https:{{ 'menu_background_image.png' | asset_url }}";//Background image lever 1
+  {% else %}
+  $menu_background_image: "";
+{% endif %}
+$menu_color_dropdown: {{ settings.menu_color_dropdown }};//Text color menu dropdown
+$menu_color_dropdown_active:  {{ settings.menu_color_dropdown_active }};//Text color when active or hover
+$menu_background_color_dropdown:  {{ settings.menu_background_color_dropdown }};//Background  color dropdown menu
+$menu_background_color_dropdown_active: {{ settings.menu_background_color_dropdown_active }};//Background  color dropdown menu when active
+{% if  settings.menu_use_background_image_dropdown %}
+$menu_background_image_dropdown:  "https:{{  'menu_background_image_dropdown.png' | asset_url }}";//Background color image dropdown menu
+  {% else %}
+  $menu_background_image_dropdown:  "";
+{% endif %}
+$menu_font_google:  {{ settings.menu_font_google }};//Font google
+$menu_font_size:  {{ settings.menu_font_size }};//Font size
+$menu_font_weight:  {{ settings.menu_font_weight }}; //Font weight
+
+@import url(https://fonts.googleapis.com/css?family={{ settings.menu_font_google }}:300italic,400italic,700italic,400,300,700,900,900italic|Open+Sans:400italic,700italic,400,700);
+
+#menu-navigation-horizontal{
+  margin-top: 30px;
+  ul.site-nav{
+    >li.menu-level-1{
+      display: inline-block;
+      &:hover{
+        >ul{
+          display: block !important; 
+        }
+      }
+      >a{
+            padding: 20px 25px;
+          /* background: red; */
+          border: 1px solid #dedede;
+          box-shadow: 1px 1px 1px 1px #dedede;
+          color:$menu_color_primary;
+      }
+      >ul.dropdown-menu{
+        position: absolute;
+        z-index: 9999;
+        display: none;
+        padding:15px 0 0 0 ;
+        background-color:$menu_background_color_dropdown;
+        >li{
+          display: block;
+          float: left;
+          width: 200px;
+          >a{
+            padding:15px 20px;
+            color:$menu_color_dropdown;
+          }
+          >li{
+            >ul{
+              >li{
+                a{
+                  padding:10px 15px;
+                  color:$menu_color_dropdown;
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#menu-navigation-vertical{
+  ul.site-nav{
+    width: 18%;
+    position: absolute;
+    z-index: 999;
+    background: #dedede;
+    >li.menu-level-1{
+       display: block;
+    position: relative;
+    padding: 10px 10px;
+
+      >a{
+        padding:10px 30px;
+        background:$menu_background_color;
+
+      }
+      &:hover{
+        ul.dropdown-menu{
+          display: block !important;
+        }
+      }
+      >ul.dropdown-menu{
+        position: absolute;
+        left: 100%;
+        top: 0;
+        display: none;
+        background-color:$menu_background_color_dropdown;
+        >li{
+           display: block;
+         display: inline-block;
+         width: 200px;
+        }
+      }
+
+      }
+  }
+}
+/*================ Navbar Kiti ================*/
+
+// MenuName
+.navbar-kiti {
+  @if $menu_background_image ==""{
+    background-color:$menu_background_color;
+  }@else{
+    background: url('#{$menu_background_image}');
+  }
+  border-bottom: 1px solid #e1e1e1;
+  .navbar-header{
+    a{
+      font-family: $menu_font_google;
+    }
+  }
+  .navbar-nav{
+    a.MenuName{
+      font-family: $menu_font_google;
+      font-weight:$menu_font_weight;
+      font-size: #{$menu_font_size}px;
+      i.fa.fa-caret-down {
+        padding-left: 5px;
+      }
+      &:hover, &:focus{
+        outline:none;
+        text-decoration:none;
+      }
+    }
+  }
+}
+// Navbar
+.navbar-kiti {
+  .navbar-nav {
+    display:block;
+    .Menu {
+      float: left;
+      position:relative;
+      &:hover{
+        background-color:$menu_background_color_active;
+        a.MenuName.level1 {
+          color: $menu_color_primary_active;
+        }
+        div.site-nav__dropdown {
+          display:block;
+        }
+      }
+      &.active {
+        background-color:$menu_background_color_active;
+        a.MenuName.level1 {
+          color: $menu_color_primary_active;
+        }
+      }
+      &.odd1 {
+      }
+      &.even1 {
+      }
+      &.first{
+      } 
+      &.last{
+      } 
+      a.MenuName.level1 {
+        color: $menu_color_primary;
+        height:50px;
+        display: inline-table;
+        padding: 0px 15px;
+        span{
+          display:table-cell;
+          vertical-align:middle;
+        }
+      }
+
+      div.site-nav__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0,0,0,.15);
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        -webkit-animation-duration: .4s;
+        animation-duration: .4s;
+        @if $menu_background_image_dropdown ==""{
+          background-color:$menu_background_color_dropdown;
+        }@else{
+          background: url('#{$menu_background_image_dropdown}');
+        }
+
+        div.itemMenu {
+          position:relative;
+          &.active {
+            background-color:$menu_background_color_dropdown_active;
+          }
+          &.odd2 {
+          }
+          &.even2 {
+          }
+          &.first {
+          } 
+          &.last {
+          }
+          &.has_child {
+          }
+          &.nochild{
+          }
+          a.MenuName{
+            color: $menu_color_dropdown;
+            &:hover{
+              color: $menu_color_dropdown_active;
+              padding-left:10px;
+            }
+          }
+          a.MenuName.level2 {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            line-height: 1.42857143;
+            white-space: nowrap;
+          }
+
+          div.itemChildMenu {
+            &:hover{
+            }
+            &.active {
+            }
+            &.odd3 {
+            }
+            &.even3 {
+            }
+            &.first {
+            } 
+            &.last {
+            }
+            &.has_third {
+            }
+            &.nochild{
+            }
+            a.MenuName.level3 {
+            }
+
+            div.itemGrandChildMenu{
+              &.active {
+              }
+              &.odd4 {
+              }
+              &.even4 {
+              }
+              &.first {
+              } 
+              &.last {
+              }
+              &.has_end {
+              }
+              a.MenuName.level4 {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*================ Product Item ================*/
+
+
+
+/*================ Nivo slider ================*/
+
+/*================ Typography variables ================*/
+{% if settings.type_caption_family contains 'Google' %}
+  {% assign type_caption_parts = settings.type_caption_family | split: '_' %}
+  {% assign type_caption_name = type_caption_parts[1] %}
+  {% capture caption_family %}"{{ type_caption_name | split: ':' | first | replace: '+', ' ' }}"{% if type_caption_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign caption_weight = type_caption_parts[2] %}
+{% else %}
+  {% assign caption_family = settings.type_caption_family %}
+{% endif %}
+
+{% if settings.type_text_family_1 contains 'Google' %}
+  {% assign type_text_parts_1 = settings.type_text_family_1 | split: '_' %}
+  {% assign type_text_name_1 = type_text_parts_1[1] %}
+  {% capture text_family_1 %}"{{ type_text_name_1 | split: ':' | first | replace: '+', ' ' }}"{% if type_text_parts_1.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign text_weight_1 = type_text_parts_1[2] %}
+{% else %}
+  {% assign text_family_1 = settings.type_text_family_1 %}
+{% endif %}
+
+{% if settings.type_text_family_2 contains 'Google' %}
+  {% assign type_text_parts_2 = settings.type_text_family_2 | split: '_' %}
+  {% assign type_text_name_2 = type_text_parts_2[1] %}
+  {% capture text_family_2 %}"{{ type_text_name_2 | split: ':' | first | replace: '+', ' ' }}"{% if type_text_parts_2.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign text_weight_2 = type_text_parts_2[2] %}
+{% else %}
+  {% assign text_family_2 = settings.type_text_family_2 %}
+{% endif %}
+
+{% if settings.type_button_family contains 'Google' %}
+  {% assign type_button_parts = settings.type_button_family | split: '_' %}
+  {% assign type_button_name = type_button_parts[1] %}
+  {% capture button_family %}"{{ type_button_name | split: ':' | first | replace: '+', ' ' }}"{% if type_button_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
+  {% assign button_weight = type_button_parts[2] %}
+{% else %}
+  {% assign button_family = settings.type_button_family %}
+{% endif %}
+
+
+// Slider Caption
+$captionFontStack: {{ caption_family }};
+$captionFontWeight: {{ settings.text_weight_1 }};
+$captionFontSize: {{ settings.type_caption_size }};
+$captionFontColor: {{ settings.caption_color }};
+
+// Line 1 Font
+$text1FontStack: {{ text_family_1 }};
+$text1FontWeight: {{ settings.text_weight_2 }};
+$text1FontSize: {{ settings.type_text_size_1 }};
+$scaptionFontColor1: {{ settings.scaption_1_color }};
+
+// Line 2 Font
+$text2FontStack: {{ text_family_2 }};
+$text2FontWeight: {{ settings.text_weight_3 }};
+$text2FontSize: {{ settings.type_text_size_2 }};
+$scaptionFontColor2: {{ settings.scaption_2_color }};
+
+// Buttons
+$buttonFontStack: {{ button_family }};
+$buttonFontWeight: {{ settings.text_weight_4 }};
+$buttonFontSize: {{ settings.type_button_size }};
+$buttonFontColor: {{ settings.sbutton_color }};
