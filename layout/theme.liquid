@@ -137,7 +137,7 @@ Add the page template as a class for easy page or template specific styling.
   <!-- Remove if not using Nivoslidedr -->
   {{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
   <!-- end -->
-    {{ 'http://code.jquery.com/ui/1.11.4/jquery-ui.js' | script_tag }}
+    {{ 'jquery-ui.js' | asset_url | script_tag }}
    {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
   {% unless template contains 'compare' %}
   {{'jquery.storageapi.min.js' | asset_url | script_tag }}

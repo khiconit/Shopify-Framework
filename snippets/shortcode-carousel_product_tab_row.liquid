@@ -16,7 +16,7 @@
 						{% for i in (1..total_tab) %}
 							{% assign collection_name = 'collection' | append: i  %}
 							{% assign tab_handle = 'carousel_product_Multi_tab_row_collection' | append  : i %}
-							{% capture handleize_tab  %}{% include 'shortcode-render' render:collection_name default:settings[tab_handle] %}{% endcapture %}
+							{% capture handleize_tab  %}{% include 'shortcode-render' render:collection_name default:''%}{% endcapture %}
 							{% if  handleize_tab  !="" %}
 								<li role="presentation" class="{% if check_tab  ==1 %} active  first{% endif %} {%if forloop.last %} last  {% endif %}">
 									<a href="#{{tab_handle}}" aria-controls="{{collections[handleize_tab].title  | escape | downcase }}" role="tab" data-toggle="tab">{{collections[handleize_tab].title |   escape  }}</a>
@@ -40,7 +40,7 @@
 		  		{% assign check_row = 1 %}
 				{% assign collection_name = 'collection' | append: i  %}
 				{% assign tab_handle = 'carousel_product_Multi_tab_row_collection' | append  : i %}
-				{% capture handleize_tab  %}{% include 'shortcode-render' render:collection_name default:settings[tab_handle] %}{% endcapture %}
+				{% capture handleize_tab  %}{% include 'shortcode-render' render:collection_name default:'' %}{% endcapture %}
 				{% if handleize_tab != "" %}
 					 <div role="tabpanel" class="tab-pane {% if check_content ==1 %} active first {% endif %} {% if forloop.last %} last  {% endif %}" id="{{tab_handle}}">
 					 		 <div  class="owl-carousel multi-row-{{tab_handle}}">

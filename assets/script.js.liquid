@@ -55,6 +55,7 @@
                     if (status == "success") {
                         $this.hide(600).next('a.added-wishlist').show(700);
                         $("#loading").hide(500);
+                                alert('add success');
                     } else {
                         $("#loading").hide(500);
                     }
@@ -102,7 +103,6 @@
                         $("tr." + value).slideUp(600);
                         $("#loading").hide(500);
                     } else {
-
                         $("#loading").hide(500);
                     }
                 }
@@ -131,7 +131,7 @@
             if (Object.keys(compare).length >= total_compare) {
                 alert("Over product. Please remove a product in compare");
             } else {
-                for (i = 1; i <= 3; i++) {
+                for (var i = 1; i <= 3; i++) {
                     if (compare['p' + i] == "" || compare['p' + i] == undefined) {
                         compare['p' + i] = pid;
                         break;

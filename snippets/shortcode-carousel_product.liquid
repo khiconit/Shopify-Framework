@@ -1,4 +1,4 @@
-{% capture collection_handle %}{%include 'shortcode-render' render:'collection' default:settings.carousel_product_single_tab_collection%}{% endcapture %}
+{% capture collection_handle %}{%include 'shortcode-render' render:'collection' default:''%}{% endcapture %}
 {% if collection_handle != "" %}
 {% capture block_title %}{%include 'shortcode-render' render:'title' default:settings.carousel_product_single_tab_title%}{% endcapture %}
 	{% assign total = settings.carousel_product_single_tab_total  %}

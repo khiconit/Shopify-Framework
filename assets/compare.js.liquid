@@ -43,6 +43,7 @@
           	$.each(compare,function(index, el) {
           		if(el== id){
           			compare[index]="";
+                delete compare[index];
           		}
           	});
           	 storage.set('compare',compare);

@@ -1,4 +1,4 @@
-{% capture  collection_handle %}{%include 'shortcode-render' render:'collection' default:settings.carousel_product_single_tab_row_collection%}{% endcapture %}
+{% capture  collection_handle %}{%include 'shortcode-render' render:'collection' default:''%}{% endcapture %}
 {% if collection_handle != "" %}
 	{% assign num_row = settings.carousel_product_single_tab_row_num_row  |  convert: "number"  %}
 	{% capture shortcode_row %}{%include 'shortcode-render' render:'rows' default:num_row%}{% endcapture %}

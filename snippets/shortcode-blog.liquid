@@ -5,7 +5,7 @@
 	<section id="blog-home">
 		<div class="blog-heading">
 			<h2>{% include 'shortcode-render' render:'title' default:settings.blog_home_title| strip_html %}</h2>
-		</div> 
+		</div>  
 		<div class="blog-section"  id="{% include 'shortcode-render' render:'id' default:'blog-slider' %}">
 			{% for article in blogs[handle_name].articles limit: total_post %}
 				<div class="  wow bounceInLeft animated">
