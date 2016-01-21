@@ -41,7 +41,7 @@
 							<div class="content-right col-md-7 pull-right">
 							<div class="product-text">
 								<h2><a class="product-title" href="{{ product.url | within: collection }}" title="">{{ product.title }} </a></h2>
-								<p class="event-description">{{ product.description | truncatewords: 150 }}</p>
+								<p class="event-description">{{ product.description | truncatewords: 100  | strip_html }}</p>
 								<div class="product-price  ">
 									  {% comment %}
 									      You can show a leading 'from' or 'up to' by checking 'product.price_varies'

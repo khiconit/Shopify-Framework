@@ -28,8 +28,10 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-  {{ 'animate.css' | asset_url | stylesheet_tag }}
   {{ 'kiti_bt.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'bootstrap-theme.min.css' | asset_url | stylesheet_tag }}
+  {{ 'animate.css' | asset_url | stylesheet_tag }}
+{% comment %}  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} {% endcomment %}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'  | stylesheet_tag }}
   <!-- Remove if not using Nivoslidedr -->
@@ -46,7 +48,7 @@
 
   {{ 'jquery.bxslider.css'  | asset_url | stylesheet_tag }}
   {{'magnifier.css' | asset_url | stylesheet_tag }}
-  {{ 'http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css' | stylesheet_tag }}
+  {{ 'jquery-ui.css' | asset_url | stylesheet_tag }}
   {{'icomoon.css' | asset_url | stylesheet_tag }}
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}

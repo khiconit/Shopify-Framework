@@ -22,12 +22,12 @@
 
 {% include 'breadcrumb' %}
 
-<div class="grid">
+<div class="row">
 
-  <article class="grid__item large--three-quarters" itemscope itemtype="http://schema.org/Article">
+  <article class="container" itemscope itemtype="http://schema.org/Article">
 
     <header class="section-header">
-      <div class="section-header__left">
+      <div class="section-header-left">
         <h1>{{ article.title }}</h1>
         {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
         {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}

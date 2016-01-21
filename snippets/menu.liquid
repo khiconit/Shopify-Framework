@@ -50,7 +50,7 @@
           {% if menu_type contains "vertical" %}
             <h2>All Categories</h2>
           {% endif %}
-          <ul class="site-nav" id="main-menu-{{menu_type}}">
+          <ul class="site-nav" id="main-menu-{{menu_type}}" menu-page="{{template}}">
            <!--- get menu user choose in custom theme -->
             {% for link in linklists[handle_parent_menu].links %}
               {% assign child_list_handle = link.title | handleize %}
@@ -72,7 +72,7 @@
                         {% if linklists[third_list_handle] and linklists[third_list_handle].links.size >0  and  menu_number_lever >=3 %}
                           <li class="{% if childlink.active %} active {% endif %} {%  cycle 'odd','even' %} {% if forloop.first %} first {% endif %}  {% if forloop.last %}  last {% endif%} has_child menu-level-2"  >
                               <a href="{{ childlink.url }}" class="menu-link"> 
-                                     {% if link.title contains '['%}
+                                     {% if childlink.title contains '['%}
                                         {% assign icon  = childlink.title |  split: '[' | last  | split: ']' | first %}
                                          <i class="fa {{ icon | strip_html }}"></i>
                                          {{ childlink.title |  split: '[' | first }}
@@ -128,7 +128,7 @@
                         {% else %}
                            <li class="{% if childlink.active %} site-nav--active{% endif %} {%  cycle 'odd','even' %} {% if forloop.first %} first {% endif %}  {% if forloop.last %}  last {% endif%}   nochild menu-level-2"  >
                               <a href="{{ childlink.url }}" class="menu-link">
-                                   {% if link.title contains '['%}
+                                   {% if childlink.title contains '['%}
                                         {% assign icon  = childlink.title |  split: '[' | last  | split: ']' | first %}
                                          <i class="fa {{ icon | strip_html }}"></i>
                                          {{ childlink.title |  split: '[' | first }}
