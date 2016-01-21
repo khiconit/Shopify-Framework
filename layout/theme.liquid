@@ -49,7 +49,9 @@
   {{ 'jquery.bxslider.css'  | asset_url | stylesheet_tag }}
   {{'magnifier.css' | asset_url | stylesheet_tag }}
   {{ 'jquery-ui.css' | asset_url | stylesheet_tag }}
+{% comment %}  
   {{'icomoon.css' | asset_url | stylesheet_tag }}
+{% endcomment %}
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
   {% include 'oldIE-js' %}

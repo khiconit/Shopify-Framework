@@ -6055,8 +6055,13 @@
             "label": "Use brand logo 1",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_1",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_1.jpg",
+            "id": "brand_logo_1.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  1"
         }, {
@@ -6070,8 +6075,13 @@
             "label": "Use brand logo 2",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_2",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_2.jpg",
+            "id": "brand_logo_2.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  2"
         }, {
@@ -6085,8 +6095,13 @@
             "label": "Use brand logo 3",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_3",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_3.jpg",
+            "id": "brand_logo_3.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  3"
         }, {
@@ -6100,8 +6115,13 @@
             "label": "Use brand logo 4",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_4",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_4.jpg",
+            "id": "brand_logo_4.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  4"
         }, {
@@ -6116,8 +6136,13 @@
             "label": "Use brand logo 5",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_5",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_5.jpg",
+            "id": "brand_logo_5.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  5"
         }, {
@@ -6132,8 +6157,13 @@
             "label": "Use brand logo 6",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_6",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_6.jpg",
+            "id": "brand_logo_6.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  6"
         }, {
@@ -6148,8 +6178,13 @@
             "label": "Use brand logo 7",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_7",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_7.jpg",
+            "id": "brand_logo_7.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  7"
         }, {
@@ -6164,8 +6199,13 @@
             "label": "Use brand logo 8",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_8",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_8.jpg",
+            "id": "brand_logo_8.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  8"
         }, {
@@ -6180,8 +6220,13 @@
             "label": "Use brand logo 9",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_9",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_9.jpg",
+            "id": "brand_logo_9.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  9"
         }, {
@@ -6196,8 +6241,13 @@
             "label": "Use brand logo 10",
             "default": false
         }, {
+            "type": "text",
+            "id": "brand_name_10",
+            "label": "Brand name",
+            "placeholder": "Company sample"
+        }, {
             "type": "image",
-            "id": "brand_logo_10.jpg",
+            "id": "brand_logo_10.png",
             "label": "Choose brand logo",
             "info": "Logo for brand  10"
         }, {

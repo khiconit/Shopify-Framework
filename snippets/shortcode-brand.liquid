@@ -1,30 +1,27 @@
 {% assign brand_title = settings.brand_title %}
-{% assign brand_dumyimage = settings.brand_dumyimage %}
+{% assign total_brand =  10  %}
+{% assign handle_brand_use   = 'brand_use_' %}
+{% assign handle_brand_image ='brand_logo_'  %}
+{% assign handle_brand_link = 'brand_link_'  %}
 <div id="our-brand" class="brand-carousel">
 	<div class="brand-heading">
 		<h2> {{ brand_title | strip_html }}</h2>
-	</div>
+	</div> 
 	<div id="{% include 'shortcode-render' render:'id' default:'brand-slider' %}">
-		{% for vendor in shop.vendors %}
-		<div class="item-brand">
-		    {% capture first_char %}{{ vendor | truncate: 1, '' }}{% endcapture %}
-			{%  assign handle_vendor = vendor | handleize %}
-	    	{% assign collection  = collections[handle_vendor] %}
-	    	{% if collection.handle  !=""  %}
-				<a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image" alt="{{ collection.title}}">
-		            {% if collection.image %}
-		              {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
-		            {% else %}
-		              {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
-		            {% endif %}
-		        </a>
-		      {% else %}
-		      	{% if brand_dumyimage %}
-					<a href="#" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image" alt="Vendor product">
-			             {{ 'http://dummyimage.com/205x95&text=' | append: first_char | img_tag }}
+		{% for  i in (1..total_brand) %}
+	 
+			<div class="item-brand">
+		    	{% assign collection_handle   = handle_brand_use | append: i %}
+		    	{% assign collection_image  =  handle_brand_image | append: i | append: '.png'%}
+		    	{% assign collection_link = handle_brand_link | append: i  %}
+		    	{% assign brand_name  =  'brand_name_' | append: i %}
+		    	
+		    	{% if settings[collection_handle]    %}
+ 
+					<a href="{{ settings[collection_link] }}" title="{{settings[brand_name] | strip_html }}" class="grid__image" alt="{{settings[brand_name] | strip_html }}">
+			             {{  collection_image | asset_url | img_tag:settings[brand_name]    }}
 			        </a>
 		        {% endif %}
-	        {% endif %}
 	        </div>
 		{% endfor %}
 	</div>
@@ -35,13 +32,11 @@ $(function(){
 	"use strict";
 	jQuery(document).ready(function($) {
 		$("#{% include 'shortcode-render' render:'id' default:'brand-slider' %}").owlCarousel({
- 
 		    // Most important owl features
 		    items : {% include 'shortcode-render' render:'cols' default: settings.brand_items %},
 		    itemsDesktop : [1199,{{settings.brand_itemsDesktop}}],
 		    itemsTablet: [768,{{settings.brand_itemsTablet}}],
 		    itemsMobile : [479,{{settings.brand_itemsMobile}}],
-		  
 		    //Basic Speeds
 		    slideSpeed : {{settings.brand_speed}},
 		    paginationSpeed : {{settings.brand_speed}},
