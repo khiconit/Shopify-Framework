@@ -22,7 +22,7 @@
   {% include 'breadcrumb' %}
  
   <div class="grid product-single" id="product-single">
-    <div class="grid__item large--one-half text-center">
+    <div class="col-md-6 col-sm-12 text-center">
       <div class="product-single__photos" id="ProductPhoto">
         {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
           <ul class="bxslider">
@@ -48,21 +48,15 @@
           </div>
       </div>
     </div>
-
-    <div class="grid__item large--one-half">
-
-      <h1 itemprop="name">{{ product.title }}</h1>
-
-      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-
-        <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-
+    <div class="col-md-6 col-sm-12">
+       <h1 itemprop="name">{{ product.title }}</h1>
+       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
         {% comment %}
           ID addToCartForm is a selector for the ajax cart plugin
         {% endcomment %}
-        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
-
+         <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="form-vertical">
           {% comment %}
             Add product variants as a dropdown.
               - By default, each variant (or combination of variants) will display as its own <option>
@@ -79,7 +73,6 @@
           <select name="id" id="productSelect" class="product-single__variants">
             {% for variant in product.variants %}
               {% if variant.available %}
-
                 {% comment %}
                   Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
                 {% endcomment %}
@@ -91,7 +84,7 @@
                 </option>
               {% endif %}
             {% endfor %}
-          </select>
+           </select>
 
           <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
           <span id="ProductPrice" class="h2" itemprop="price">
@@ -111,36 +104,36 @@
           <button type="submit" name="add" id="AddToCart" class="btn">
             <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
           </button>
+
         </form>
-
+           {% include 'wishlist-product'   %} 
+           <a href="#" class="compare" data-pid="{{product.handle}}" title="{{ 'compare.general.compare_product' | t }}" data-toggle="tooltip" data-placement="top"><i class="fa fa-retweet"></i></a>
       </div>
-
-      <div class="product-description rte" itemprop="description">
-          <div>
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">description</a></li>
-    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">reviews</a></li>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="description">
+      <div class="short-description">
+          {{ product.description | truncatewords: 100 }}
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
       
-{% include 'shortcode' load: product.description %}
 
-    </div>
-    <div role="tabpanel" class="tab-pane" id="reviews">
-      <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
-    </div>
- 
-  </div>
-
-</div>
-        
+    <div class="product-description rte" itemprop="description">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">description</a></li>
+              <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">reviews</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="description">
+          {% include 'shortcode' load: product.description %}
+              </div>
+              <div role="tabpanel" class="tab-pane" id="reviews">
+                <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+              </div>
+            </div>
+                  
         {% comment %} Lưu ý khi thay thế  phải cho biến  trên vào {% endcomment %}
-      </div>
+    </div>
 
       {% comment %}
         If the user is on a collection product page (ie with /collections/collection-handle/products/product-handle)

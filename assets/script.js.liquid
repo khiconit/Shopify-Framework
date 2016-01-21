@@ -163,6 +163,11 @@
         var bx_page;
         bx_slider = $('.bxslider').bxSlider({
             pagerCustom: '#bx-pager',
+            onSlideAfter: function($slideElement, oldIndex, newIndex) {
+                            $('.zoomContainer').remove();
+                            $.removeData($(".bxslider li img"), 'elevateZoom');
+                            $(".bxslider li:nth-of-type(" + (newIndex + 2) + ") img").elevateZoom(zoom_config);
+                        }
         });
         bx_page = $("#ProductThumbs").bxSlider({
             slideWidth: 84,
@@ -178,6 +183,7 @@
         $(".bxslider-home").each(function(index, el) {
             $("#bxslider-home" + index).bxSlider({
                 pagerCustom: '#bx-pager-home' + index,
+
             });
         });
         $(".ProductThumbs-home").each(function(index, el) {
@@ -211,7 +217,7 @@
         /**
          *  elevateZoom Zoom
          */
-        $(".bxslider li img").elevateZoom(zoom_config);
+        $(".bxslider li:nth-of-type(2) img").elevateZoom(zoom_config);
         /**
          * Quick view modal
          */
