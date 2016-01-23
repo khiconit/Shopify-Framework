@@ -1419,6 +1419,7 @@
         "type": "text",
         "id": "newsletter_form_action",
         "label": "MailChimp form action URL",
+        "default": "//rdcma.us11.list-manage.com/subscribe/post?u=f09c5e37ab26c3077904f8479&amp;id=73261d64be",
         "info": "[Find your MailChimp form action URL](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/accounts-and-newsletters\/get-a-mailchimp-form-action-url)."
     }, {
         "type": "checkbox",
@@ -6669,5 +6670,24 @@
         "type": "checkbox",
         "id": "share_google",
         "label": "+1 on Google Plus"
+    }]
+}, {
+    "name": "NewsLetter settings",
+    "settings": [{
+        "type": "header",
+        "content": "General"
+    }, {
+        "type": "checkbox",
+        "id": "newsletter_enable",
+        "label": "Enable use newsletter",
+        "default": true
+    }, {
+        "type": "textarea",
+        "id": "newsletter_script",
+        "label": "MailChimp Script",
+        "default": "<script type=\"text\/javascript\" src=\"\/\/s3.amazonaws.com\/downloads.mailchimp.com\/js\/signup-forms\/popup\/embed.js\" data-dojo-config=\"usePlainJson: true, isDebug: false\"><\/script><script type=\"text\/javascript\">require([\"mojo\/signup-forms\/Loader\"], function(L) { L.start({\"baseUrl\":\"mc.us11.list-manage.com\",\"uuid\":\"f09c5e37ab26c3077904f8479\",\"lid\":\"14116556e4\"}) })<\/script>",
+        "placeholder": "Paste your script in here",
+        "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+
     }]
 }]

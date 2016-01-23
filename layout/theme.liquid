@@ -87,9 +87,40 @@ Add the page template as a class for easy page or template specific styling.
   	{% assign layout_widths = 'container-box' %}
   	{% assign layout_width = 'container' %}
   {% endif %}
-   
+<nav class="navbar navbar-default" id="top-menu">
+  <div class="container-fluid">
+ <p class="navbar-text"><i class="fa fa-shopping-basket"></i><marquee align="center" direction="left" scrollamount="4" width="300" behavior="alternate">  Shopify framework Develop by RDCMA</marquee></p>
+    <ul class="nav navbar-nav navbar-right"> 
+        <li id="fat-menu" class="dropdown"> 
+              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Account <span class="caret"></span> 
+              </a> 
+              <ul class="dropdown-menu" aria-labelledby="drop3"> 
+                <li><a href="/pages/compare">Compare</a></li> 
+                {% if customer %}
+                    <li><a href="/collections/wishlist">Wishlist</a></li>  
+                  {% else %}
+                  <li>{{ 'Log in' | customer_login_link }}</li>
+                  <li><a   data-toggle="modal" href='#modal-register'>Register</a></li>
+                {% endif %}
+             </ul>
+          </li>
+      </ul>
+          <ul class="nav navbar-nav navbar-right"> 
+            <li id="fat-menu" class="dropdown"> 
+                  <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Language <span class="caret"></span> 
+                  </a> 
+                  <ul class="dropdown-menu" aria-labelledby="drop3"> 
+                     <li><a href="#">Vietnames</a> </li>
+                     <li><a href="#">US</a> </li>
+                     <li><a href="#">CN</a> </li>
+
+                 </ul>
+              </li>
+      </ul>
+  </div>
+</nav>
   <div class="{{layout_widths}}">
-    <div class="{{layout_width}}">
+     <div class="{{layout_width}}">
 
       {%comment%}
         -top_link.
@@ -137,6 +168,7 @@ Add the page template as a class for easy page or template specific styling.
   <!-- Latest compiled and minified JavaScript -->
 
   {% include 'modal-quickview' %}
+  {% include 'modal-register'  %}
   {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'  |  script_tag }}  
   {{ 'modernizr.min.js' | asset_url | script_tag }}
   <!-- Remove if not using Nivoslidedr -->
@@ -145,10 +177,7 @@ Add the page template as a class for easy page or template specific styling.
   {% if template contains 'collection' %}
      {{ 'jquery-ui.min.js' | asset_url | script_tag }}
      {{ 'filter.js' | asset_url | script_tag }}
-
-
   {% endif %}
-   
    {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
   {% unless template contains 'compare' %}
   {{'jquery.storageapi.min.js' | asset_url | script_tag }}
@@ -173,7 +202,13 @@ Add the page template as a class for easy page or template specific styling.
     });
     {% endif %}
   </script>
- 
+
+  {% comment %}Newsletter{% endcomment %}
+  {% if settings.newsletter_enable %}
+    {% if settings.newsletter_script | strip != "" %}
+      {{settings.newsletter_script}}
+    {% endif %}
+  {% endif %}
   {% comment %}
   Ajaxify your cart with this plugin.
   Documentation:

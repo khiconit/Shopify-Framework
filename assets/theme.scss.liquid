@@ -934,3 +934,17 @@ $buttonFontColor: {{ settings.sbutton_color }};
     border: 1px solid #ddd;
     margin-left: -1px;
 }
+#top-menu{
+  li.dropdown{
+    &:hover{
+      >ul.dropdown-menu{
+        display: block !important;
+      }
+    }
+  }
+  .dropdown-menu{
+    position:absolute;
+    display: none;
+
+  }
+}
