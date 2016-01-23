@@ -18,7 +18,7 @@
            					jQuery.getJSON(json_url, function(product) {
            						 var html ='';
 							  	 html = html + '<tr class="'+product.handle+'">';
-							  	 html = html + '<td> <img src="'+product.featured_image+'" class="compare-image" /> </td>';
+							  	 html = html + '<td> <img src="'+product.featured_image+'" class="compare-image"  width="150"/> </td>';
 							  	 html = html + '<td> <a href="/'+ product.url+'"><h3> '+product.title +' </h3></a>  <p> Price <strong>  '+product.price +' </strong> </p> </td>';
 							  	 html = html + '<td> '+ product.description +' </td>';
 							  	 html = html + '<td> <button type="button" class="btn btn-danger remove-compare" data-handle="'+product.handle+'" >Remove</button> </td>';
@@ -35,8 +35,6 @@
           }
           $("#table-compare").on('click', '.remove-compare', function(event) {
           	event.preventDefault();
-          
-          	alert();
           	/* Act on the event */
           	var id = $(this).data('handle');
           	$("tr."+id).fadeOut(600);
@@ -47,6 +45,7 @@
           		}
           	});
           	 storage.set('compare',compare);
+             swal({   title: "Delete success",   text: "I will close in 2 seconds.",   timer: 2000,   showConfirmButton: false,type: "success"});
           });
            
 	  	});	

@@ -22,29 +22,43 @@
 {% comment %}
   Use .grid--rev so that the collection tags appear below the products on mobile
 {% endcomment %}
-<div class="grid--rev">
-  <div class="grid__item large--three-quarters">
+<div class="container">
+  <div class="row">
+  <div class="col-md-3">
+        <div class="range">
+          <p>
+          <label for="amount">Price range:</label>
+          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range"></div>
+        </div>
+  </div>
 
     {% comment %}
       Different markup if a collection description exists
     {% endcomment %}
+   <div class="col-md-9">
     {% if collection.description != blank %}
       <header class="section-header">
-        <h1 class="section-header__title">{{ collection.title }}</h1>
-        <div class="rte rte--header">
+        <h1 class="section-header-title page-header">{{ collection.title }}</h1>
+         {% if collection.image.size > 0 %}
+          <div class="collection-banner"></div>
+            {{ collection.image.src | img_url: 'large' | img_tag:collection.title,'banner' }}
+          {% endif %}
+        <div class="collection-header">
           {{ collection.description }}
         </div>
       </header>
       <hr>
       <div class="section-header">
-        <div class="section-header__right">
+        <div class="pull-right inline">
           {% include 'collection-sorting' %}
         </div>
       </div>
     {% else %}
       <header class="section-header">
         <h1 class="section-header__title section-header__left">{{ collection.title }}</h1>
-        <div class="section-header__right">
+        <div class="section-collection pull-right">
           {% include 'collection-sorting' %}
         </div>
       </header>
@@ -54,8 +68,8 @@
       Use class grid-uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
-    <div class="grid-uniform">
-
+    <div class="row">
+      <div class="products-list" id="products-list">
       <!-- begin product list output -->
       {% for product in collection.products %}
 
@@ -75,39 +89,25 @@
           {% assign sold_out = false %}
         {% endif %}
 
-        <div class="grid__item">
+      <div class="item-list">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="image-container">
+             <a href="{{ product.url | within: collection }}" class="thumbnail">
+                <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" class="product-image">
+            </a>
+          </div>
 
-          {% comment %}
-            Link to your product with the 'within: collection' filter for the link to be aware of the collection.
-            This allows you to create collection-based navigation on the product page.
-
-            Results of using 'within: collection':
-            - Instead of a URL with /products/product-handle
-              you would get /collections/collection-handle/products/product-handle
-
-            For more info on navigation within a collection
-              - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
-          {% endcomment %}
-          <div class="grid large--display-table">
-            <div class="grid__item large--one-fifth large--display-table-cell medium--one-third">
-              <a href="{{ product.url | within: collection }}">
-                <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" class="grid__image">
-              </a>
-            </div>
-            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds">
-              <div class="grid">
-                <div class="grid__item large--three-quarters medium--two-thirds">
-                  <p class="h6">{{ product.title }}</p>
-                  <div class="rte">
-                    <p>{{ product.content | strip_html | truncatewords: 30 }}</p>
-                  </div>
-                </div>
-                <div class="grid__item large--one-quarter medium--one-third">
-                  {% comment %}
-                    You can show a leading 'from' or 'up to' by checking 'product.price_varies'
-                    if your variants have different prices.
-                  {% endcomment %}
-                  {% if on_sale %}
+        </div>
+        <div class="col-md-8 col-sm-6 col-xs-12">
+            <a href="{{product.url}}" class="product-link"><h2 class="product-name">{{ product.title }}</h2> </a>
+           <div class="product-rating">
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          </div>
+          <div class="product-description">
+             <p>{{ product.content | strip_html | truncatewords: 30 }}</p>
+          </div>
+          <div class="product-price">
+                 {% if on_sale %}
                     {% if product.price_varies %}
                       {% assign sale_price = product.price | money %}
                       {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
@@ -129,35 +129,55 @@
                   {% if on_sale %}
                     <br><span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span><s>{{ product.compare_at_price | money }}</s>
                   {% endif %}
-                </div>
-              </div>
+          </div>
+          <div class="product-ovelay">
+              <a href="{{ product.url | within: collection }}" data-pid="{{product.id}}" class="quick-view" title="Quick view" data-toggle="tooltip" data-placement="top"><i class="fa fa-search"></i></a>
+             {% include 'wishlist-product'   %} 
+             <a href="#" class="compare" data-pid="{{product.handle}}" title="{{ 'compare.general.compare_product' | t }}" data-toggle="tooltip" data-placement="top"><i class="fa fa-retweet"></i></a>
+             {% if product.options.size > 1 %}
+                <a href="#" onclick="location.href='{{ product.url | within: collection }}'">{{'products.product.product_option' | t }}</a>
+             {% else %}
+            <div class="pro-add-to-cart">
+             {% if product.variants.first.available %}
+              <p><a href="#" title="{{'products.product.add_to_cart' | t }}" data-pid="{{ product.variants.first.id }}" class="add-to-cart">{{'products.product.add_to_cart' | t }}</a></p>
+            {% endif %}
             </div>
+           {% endif %}
           </div>
         </div>
 
+      </div>
+            
+ 
+       
+
       {% else %}
 
-        <div class="grid__item">
+        <div class="row">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
 
       {% endfor %}
+      </div>
       <!-- //product list output -->
 
     </div>
+   </div>
 
     {% if paginate.pages > 1 %}
       <hr>
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-      </div>
+      <nav>
+        <ul class="pagination">
+        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' | replace: 'span','li' }}
+      </ul>
+      </nav>
     {% endif %}
 
   </div>
 
-  <div class="grid__item large--one-quarter">
+ {% comment %} <div class="grid__item large--one-quarter">
     {% include 'collection-sidebar' %}
-  </div>
+  </div>{% endcomment %}
 </div>
 
 {% endpaginate %}

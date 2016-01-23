@@ -222,7 +222,7 @@ $accentFontWeight: {{ accent_weight }};
 $accentFontSize: {{ settings.type_accent_size }};
 
 
-/*================ Menu By Litter Little Monkey ================*/
+/*================ Menu  ================*/
 $menu_sticky: {{ settings.menu_sticky }}; //if menu sticky ==true  then menu will fixed in top
 $menu_use_animation:  {{ settings.menu_use_animation }}; //Enable use animate css
 $menu_type_animation:  {{ settings.menu_type_animation }};//Choose type animate
@@ -233,8 +233,8 @@ $menu_background_color: {{ settings.menu_background_color }}; //Background color
 $menu_background_color_active: {{ settings.menu_background_color_active }};//Menu background color when hover
 {% if settings.menu_use_background_image %}
 $menu_background_image: "https:{{ 'menu_background_image.png' | asset_url }}";//Background image lever 1
-  {% else %}
-  $menu_background_image: "";
+{% else %}
+$menu_background_image: "";
 {% endif %}
 $menu_color_dropdown: {{ settings.menu_color_dropdown }};//Text color menu dropdown
 $menu_color_dropdown_active:  {{ settings.menu_color_dropdown_active }};//Text color when active or hover
@@ -242,15 +242,16 @@ $menu_background_color_dropdown:  {{ settings.menu_background_color_dropdown }};
 $menu_background_color_dropdown_active: {{ settings.menu_background_color_dropdown_active }};//Background  color dropdown menu when active
 {% if  settings.menu_use_background_image_dropdown %}
 $menu_background_image_dropdown:  "https:{{  'menu_background_image_dropdown.png' | asset_url }}";//Background color image dropdown menu
-  {% else %}
-  $menu_background_image_dropdown:  "";
+{% else %}
+$menu_background_image_dropdown:  "";
 {% endif %}
 $menu_font_google:  {{ settings.menu_font_google }};//Font google
+//$font-stack: Helvetica, sans-serif;
+$menu_font_google_name : {{ '"' | append : settings.menu_font_google | replace: '+',' ' | append : '", sans-serif' }};
 $menu_font_size:  {{ settings.menu_font_size }};//Font size
 $menu_font_weight:  {{ settings.menu_font_weight }}; //Font weight
-
 @import url(https://fonts.googleapis.com/css?family={{ settings.menu_font_google }}:300italic,400italic,700italic,400,300,700,900,900italic|Open+Sans:400italic,700italic,400,700);
-
+ 
 #menu-navigation-horizontal{
   margin-top: 30px;
   ul.site-nav{
@@ -917,4 +918,19 @@ $buttonFontColor: {{ settings.sbutton_color }};
     font-weight: 600;
     text-shadow: 3px 1px #dedede;
     color: red;
+}
+.item-list {
+    clear: both;
+}
+.pagination>li.current,.pagination>li.deco {
+    display: inline;
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857;
+    text-decoration: none;
+    color: #337ab7;
+    background-color: #F5F5F5;
+    border: 1px solid #ddd;
+    margin-left: -1px;
 }

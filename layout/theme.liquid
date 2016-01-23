@@ -28,7 +28,7 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-  {{ 'kiti_bt.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'bootstrap-custom.scss.css' | asset_url | stylesheet_tag }}
   {{ 'bootstrap-theme.min.css' | asset_url | stylesheet_tag }}
   {{ 'animate.css' | asset_url | stylesheet_tag }}
 {% comment %}  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} {% endcomment %}
@@ -45,10 +45,13 @@
   {{ 'owl.carousel.css' | asset_url | stylesheet_tag }}
   {{ 'owl.transitions.css' | asset_url | stylesheet_tag }}
   {{ 'owl.theme.css' | asset_url | stylesheet_tag }}
-
   {{ 'jquery.bxslider.css'  | asset_url | stylesheet_tag }}
   {{'magnifier.css' | asset_url | stylesheet_tag }}
-  {{ 'jquery-ui.css' | asset_url | stylesheet_tag }}
+  
+   {% if template contains 'collection' %}
+    {{ 'jquery-ui.min.css' | asset_url | stylesheet_tag }}
+   {% endif %}
+  {{ 'sweetalert.css'  | asset_url | stylesheet_tag }}
 {% comment %}  
   {{'icomoon.css' | asset_url | stylesheet_tag }}
 {% endcomment %}
@@ -139,7 +142,13 @@ Add the page template as a class for easy page or template specific styling.
   <!-- Remove if not using Nivoslidedr -->
   {{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
   <!-- end -->
-    {{ 'jquery-ui.js' | asset_url | script_tag }}
+  {% if template contains 'collection' %}
+     {{ 'jquery-ui.min.js' | asset_url | script_tag }}
+     {{ 'filter.js' | asset_url | script_tag }}
+
+
+  {% endif %}
+   
    {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
   {% unless template contains 'compare' %}
   {{'jquery.storageapi.min.js' | asset_url | script_tag }}
@@ -147,6 +156,7 @@ Add the page template as a class for easy page or template specific styling.
   {% if template contains "compare" %}
   {{'compare.js' | asset_url | script_tag }}
   {% endif %}
+  {{ 'sweetalert.min.js' | asset_url | script_tag  }}
   {{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
   {{ 'jquery.elevateZoom-3.0.8.min.js' | asset_url | script_tag }}
   {{ 'jquery.countdown.min.js' | asset_url | script_tag }}

@@ -14,16 +14,16 @@
 	{% if check == 0 %}{% assign display = true %}{% endif %}
 	{% assign  check_mod =  size_x | modulo :2    %}
 	{% if size_x == 0 and t == ""  %}
-		<a data-toggle="tooltip" data-placement="top" class="wishlist" data-form="{% if  size_x > 0  %}x{{ t }}{% else %}{{ product.id }}{% endif %}"   href="javascript:void(0)"><i class="fa fa-heart-o"></i> {{ 'wishlist.general.add_to_wishlist' | t }}</a>
+		<a data-toggle="tooltip" data-placement="top" class="wishlist" title="{{ 'wishlist.general.add_to_wishlist' | t }}" data-form="{% if  size_x > 0  %}x{{ t }}{% else %}{{ product.id }}{% endif %}"   href="javascript:void(0)"><i class="fa fa-heart-o"></i> </a>
 		<a href="/collections/wishlist" class="added-wishlist" title="{{ 'wishlist.general.added_to_wishlist' | t }}" data-toggle="tooltip" data-placement="top" ><i class="fa fa-heart-o"></i></a>
 	{% elsif check_mod != 0  and size_x > 0  %}
-		<a  data-toggle="tooltip" data-placement="top"  class="wishlist" data-form="{% if  size_x > 0  %}x{{ t }}{% else %}{{ product.id }}{% endif %}"   href="javascript:void(0)"><i class="fa fa-heart-o"></i> {{ 'wishlist.general.add_to_wishlist' | t }}</a>
+		<a  data-toggle="tooltip" data-placement="top"  class="wishlist" data-form="{% if  size_x > 0  %}x{{ t }}{% else %}{{ product.id }}{% endif %}"   href="javascript:void(0)" title="{{ 'wishlist.general.add_to_wishlist' | t }}"><i class="fa fa-heart-o"></i> </a>
 		<a href="/collections/wishlist" class="added-wishlist" title="{{ 'wishlist.general.added_to_wishlist' | t }}" data-toggle="tooltip" data-placement="top" ><i class="fa fa-heart-o"></i></a>
 	{% else %}
-		<a href="/collections/wishlist" data-toggle="tooltip" data-placement="top" {{ 'wishlist.general.view_wishlist' | t }}><i class="fa fa-heart-o"></i>  </a>
+		<a href="/collections/wishlist" data-toggle="tooltip" data-placement="top" title="{{ 'wishlist.general.view_wishlist' | t }}"><i class="fa fa-heart-o"></i>  </a>
 		<a href="/collections/wishlist" class="added-wishlist" title="{{ 'wishlist.general.added_to_wishlist' | t }}"><i class="fa fa-heart-o"></i> </a>
 	{% endif %}
-	<p class="wish-error" style="display:none" title="{'wishlist.general.twishlist_error' | t }} " data-toggle="tooltip" data-placement="top">{<a href="/account">{{'customer.login.sign_in' | t }}</a> or <a href="/account/register">{{'customer.register.title' | t }}</a>.</p>
+	<p class="wish-error" style="display:none" title="{'wishlist.general.twishlist_error' | t }} " data-toggle="tooltip" data-placement="top"><a href="/account">{{'customer.login.sign_in' | t }}</a> or <a href="/account/register">{{'customer.register.title' | t }}</a>.</p>
 	{% form 'customer' %}
 		<input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
 		<input type="hidden" name="contact[tags]" value="{%  if size_x >  0  %}x{{ t }}{% else %}{{ product.id }}{% endif %}" /> 

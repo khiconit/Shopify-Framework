@@ -1,0 +1,32 @@
+(function(){
+    $(document).ready(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 500,
+            max: 126911,
+            values: [500, 126911],
+            slide: function(event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            },
+            change: function(event, ui) {
+                $("#loading").show(400);
+                var max_price = ui.values[1];
+                var min_price = ui.values[0];
+                var check = 1;
+                json_collection.map(function(index, elem) {
+                    if (check <= 10) {
+                        console.log(index.price);
+                        if (index.price <= max_price && index.price >= min_price) {
+                            console.log(index);
+                        }
+                    }
+                    check++;
+                })
+                window.setTimeout(function() {
+                    $("#loading").hide(400);
+                }, 1000);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+    });
+    })(jQuery);
