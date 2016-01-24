@@ -1,0 +1,29 @@
+
+  <!-- CSS ================================================== -->
+  {{ 'bootstrap-custom.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'bootstrap-theme.min.css' | asset_url | stylesheet_tag }}
+  {{ 'animate.css' | asset_url | stylesheet_tag }}
+  {% comment %}  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} {% endcomment %}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'  | stylesheet_tag }}
+  <!-- Remove if not using Nivoslidedr -->
+  {{ 'nivo-slider.css' | asset_url | stylesheet_tag }} 
+  <!-- Latest compiled and minified CSS -->
+  <!--  FLex slider css-->
+  {{ "https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/flexslider.css" | stylesheet_tag  }}
+  <!-- end -->
+
+  <!-- Remove if not using Carousel slider-->
+  {{ 'owl.carousel.css' | asset_url | stylesheet_tag }}
+  {{ 'owl.transitions.css' | asset_url | stylesheet_tag }}
+  {{ 'owl.theme.css' | asset_url | stylesheet_tag }}
+  {{ 'jquery.bxslider.css'  | asset_url | stylesheet_tag }}
+  {{'magnifier.css' | asset_url | stylesheet_tag }}
+
+   {% if template contains 'collection' %}
+    {{ 'jquery-ui.min.css' | asset_url | stylesheet_tag }}
+   {% endif %}
+  {{ 'sweetalert.css'  | asset_url | stylesheet_tag }}
+  {% comment %}  
+  {{'icomoon.css' | asset_url | stylesheet_tag }}
+  {% endcomment %}

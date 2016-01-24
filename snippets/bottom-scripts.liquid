@@ -1,0 +1,71 @@
+  {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'  |  script_tag }}  
+  {{ 'modernizr.min.js' | asset_url | script_tag }}
+  <!-- Remove if not using Nivoslidedr -->
+  {{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
+  <!-- end -->
+  {% if template contains 'collection' %}
+     {{ 'jquery-ui.min.js' | asset_url | script_tag }}
+     {{ 'filter.js' | asset_url | script_tag }}
+  {% endif %}
+   {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
+  {% unless template contains 'compare' %}
+  {{'jquery.storageapi.min.js' | asset_url | script_tag }}
+  {% endunless %} 
+  {% if template contains "compare" %}
+  {{'compare.js' | asset_url | script_tag }}
+  {% endif %}
+  {{ 'sweetalert.min.js' | asset_url | script_tag  }}
+  {{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
+  {{ 'jquery.elevateZoom-3.0.8.min.js' | asset_url | script_tag }}
+  {{ 'jquery.countdown.min.js' | asset_url | script_tag }}
+  {{ 'fastclick.min.js' | asset_url | script_tag }}
+  {{ 'timber.js' | asset_url | script_tag }}
+  {{ 'script.js' | asset_url | script_tag }}
+  {% comment %}
+  Template-specific js
+  {% endcomment %}
+  <script>
+    {% if resetPassword %}
+    $(function() {
+      timber.resetPasswordSuccess();
+    });
+    {% endif %}
+  </script>
+
+  {% comment %}Newsletter{% endcomment %}
+  {% if settings.newsletter_enable %}
+  {% assign newsletter  = settings.newsletter_script | strip %}
+    {% if newsletter != "" %}
+      {{settings.newsletter_script}}
+    {% endif %}
+  {% endif %}
+  {% comment %}
+  Ajaxify your cart with this plugin.
+  Documentation:
+  - http://shopify.com/timber#ajax-cart
+  {% endcomment %}
+  {% if settings.ajax_cart_method == "drawer" %}
+  {{ 'handlebars.min.js' | asset_url | script_tag }}
+  {% include 'ajax-cart-template' %}
+  {{ 'ajax-cart.js' | asset_url | script_tag }}
+  <script>
+    jQuery(function($) {
+      ajaxCart.init({
+        formSelector: '#AddToCartForm',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '#AddToCart',
+        cartCountSelector: '#CartCount',
+        cartCostSelector: '#CartCost',
+        moneyFormat: {{ shop.money_format | json }}
+      });
+      });
+
+      jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
+        // Bind to 'ajaxCart.afterCartLoad' to run any javascript after the cart has loaded in the DOM
+        timber.RightDrawer.open();
+      });
+  </script>
+  {% endif %}
+  <!-- Latest compiled and minified JavaScript -->
+ 
+  <!-- Latest compiled and minified JavaScript -->

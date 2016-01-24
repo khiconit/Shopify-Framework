@@ -26,54 +26,13 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_primary }}">
+  <!--  Stylesheet  will import in snoppets/header-stylesheets.liquid-->
+  {% include 'header-stylesheets'  %}
+  <!--  Stylesheet  will import in snoppets/header-scripts.liquid-->
+  {% include 'header-scripts' %}
 
-  <!-- CSS ================================================== -->
-  {{ 'bootstrap-custom.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'bootstrap-theme.min.css' | asset_url | stylesheet_tag }}
-  {{ 'animate.css' | asset_url | stylesheet_tag }}
-{% comment %}  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} {% endcomment %}
-  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'  | stylesheet_tag }}
-  <!-- Remove if not using Nivoslidedr -->
-  {{ 'nivo-slider.css' | asset_url | stylesheet_tag }} 
-  <!-- Latest compiled and minified CSS -->
-  <!--  FLex slider css-->
-  {{ "https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/flexslider.css" | stylesheet_tag  }}
-  <!-- end -->
-
-  <!-- Remove if not using Carousel slider-->
-  {{ 'owl.carousel.css' | asset_url | stylesheet_tag }}
-  {{ 'owl.transitions.css' | asset_url | stylesheet_tag }}
-  {{ 'owl.theme.css' | asset_url | stylesheet_tag }}
-  {{ 'jquery.bxslider.css'  | asset_url | stylesheet_tag }}
-  {{'magnifier.css' | asset_url | stylesheet_tag }}
-  
-   {% if template contains 'collection' %}
-    {{ 'jquery-ui.min.css' | asset_url | stylesheet_tag }}
-   {% endif %}
-  {{ 'sweetalert.css'  | asset_url | stylesheet_tag }}
-{% comment %}  
-  {{'icomoon.css' | asset_url | stylesheet_tag }}
-{% endcomment %}
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
-  {% include 'oldIE-js' %}
-
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js' | script_tag }}
-  {{ 'owl.carousel.min.js' | asset_url | script_tag }}
-  {% if  template contains "compare" %}
-     {{'jquery.storageapi.min.js' | asset_url | script_tag }}
-  {% endif %}
-  {{ 'owl.carousel.min.js' | asset_url | script_tag }}
-  {% include 'google-fonts' %}
-  
-  {% comment %}
-  If you store has customer accounts disabled, you can remove the following JS file
-  {% endcomment %}
-  {% if template contains 'customers' %}
-  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
-  {% endif %}
-
 </head>
 
 {% comment %}
@@ -162,80 +121,10 @@ Add the page template as a class for easy page or template specific styling.
       </ul>
     </div>
   </div> 
-  
-  <!-- Latest compiled and minified JavaScript -->
- 
-  <!-- Latest compiled and minified JavaScript -->
 
-  {% include 'modal-quickview' %}
-  {% include 'modal-register'  %}
-  {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'  |  script_tag }}  
-  {{ 'modernizr.min.js' | asset_url | script_tag }}
-  <!-- Remove if not using Nivoslidedr -->
-  {{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
-  <!-- end -->
-  {% if template contains 'collection' %}
-     {{ 'jquery-ui.min.js' | asset_url | script_tag }}
-     {{ 'filter.js' | asset_url | script_tag }}
-  {% endif %}
-   {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
-  {% unless template contains 'compare' %}
-  {{'jquery.storageapi.min.js' | asset_url | script_tag }}
-  {% endunless %} 
-  {% if template contains "compare" %}
-  {{'compare.js' | asset_url | script_tag }}
-  {% endif %}
-  {{ 'sweetalert.min.js' | asset_url | script_tag  }}
-  {{ 'jquery.bxslider.min.js' | asset_url | script_tag }}
-  {{ 'jquery.elevateZoom-3.0.8.min.js' | asset_url | script_tag }}
-  {{ 'jquery.countdown.min.js' | asset_url | script_tag }}
-  {{ 'fastclick.min.js' | asset_url | script_tag }}
-  {{ 'timber.js' | asset_url | script_tag }}
-  {{ 'script.js' | asset_url | script_tag }}
-  {% comment %}
-  Template-specific js
-  {% endcomment %}
-  <script>
-    {% if resetPassword %}
-    $(function() {
-      timber.resetPasswordSuccess();
-    });
-    {% endif %}
-  </script>
-
-  {% comment %}Newsletter{% endcomment %}
-  {% if settings.newsletter_enable %}
-    {% if settings.newsletter_script | strip != "" %}
-      {{settings.newsletter_script}}
-    {% endif %}
-  {% endif %}
-  {% comment %}
-  Ajaxify your cart with this plugin.
-  Documentation:
-  - http://shopify.com/timber#ajax-cart
-  {% endcomment %}
-  {% if settings.ajax_cart_method == "drawer" %}
-  {{ 'handlebars.min.js' | asset_url | script_tag }}
-  {% include 'ajax-cart-template' %}
-  {{ 'ajax-cart.js' | asset_url | script_tag }}
-  <script>
-    jQuery(function($) {
-      ajaxCart.init({
-        formSelector: '#AddToCartForm',
-        cartContainer: '#CartContainer',
-        addToCartSelector: '#AddToCart',
-        cartCountSelector: '#CartCount',
-        cartCostSelector: '#CartCost',
-        moneyFormat: {{ shop.money_format | json }}
-      });
-      });
-
-      jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
-        // Bind to 'ajaxCart.afterCartLoad' to run any javascript after the cart has loaded in the DOM
-        timber.RightDrawer.open();
-      });
-  </script>
-  {% endif %}
-
+    {% include 'modal-quickview' %}
+    {% include 'modal-register'  %}
+    <!--  Script will import in snippets/bottom-scripts.liqu-->
+    {% include 'bottom-scripts' %}
 </body>
 </html>
