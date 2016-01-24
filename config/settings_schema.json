@@ -6523,7 +6523,7 @@
         "content": "Setting for event CountDown."
     }, {
         "type": "header",
-        "content": "General settings"
+        "content": "General Default settings"
     }, {
         "type": "text",
         "id": "event_countdown_title",

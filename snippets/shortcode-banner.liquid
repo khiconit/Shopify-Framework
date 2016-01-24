@@ -1,0 +1,11 @@
+{% capture name %}{%include 'shortcode-render' render:'name' default:'banner.jpg'%}{% endcapture %}
+{% capture cols %}{%include 'shortcode-render' render:'cols' default:'6'%}{% endcapture %}
+{% if cols == 12  or cols == "12" %}
+	<div class="row">
+{% endif %}
+<div class="col-md-{{cols}} col-xs-12 shortcode-banner">
+	{{ name | asset_url | img_tag }}
+</div>
+{% if cols == 12  or cols == "12" %}
+	</div>
+{% endif %}

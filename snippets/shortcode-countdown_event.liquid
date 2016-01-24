@@ -108,7 +108,7 @@
 		$("#{% include 'shortcode-render' render:'id' default:'event-countdown' %} .event-content").owlCarousel({
 		    // Most important owl features
 		    items : {{cols}},
-		    singleItem : {% if settings.event_countdown_col == 1 %}true{%else%}false{%endif%},
+		    singleItem : {% if cols == 1 %}true{%else%}false{%endif%},
 		    //Basic Speeds
 		    slideSpeed : 200,
 		    paginationSpeed : {{settings.event_countdown_speed}},
