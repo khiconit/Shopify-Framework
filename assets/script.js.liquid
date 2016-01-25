@@ -2,7 +2,7 @@
     'use strict';
     jQuery(document).ready(function($) {
         var $maxwidth = 880;
-        var $li_width = 220;
+        var $li_width = 220; 
         $("#menu-navigation-horizontal  ul.site-nav li.menu-level-1").each(function(index, el) {
             var $check = $(this).children('ul').children('li').hasClass('has_child');
             if ($check) {
@@ -213,6 +213,7 @@
         var bx_page;
         bx_slider = $('.bxslider').bxSlider({
             pagerCustom: '#bx-pager',
+            controls:false,
             onSlideAfter: function($slideElement, oldIndex, newIndex) {
                 $('.zoomContainer').remove();
                 $.removeData($(".bxslider li img"), 'elevateZoom');
@@ -232,6 +233,7 @@
         $(".bxslider-home").each(function(index, el) {
             $("#bxslider-home" + index).bxSlider({
                 pagerCustom: '#bx-pager-home' + index,
+
 
             });
         });
@@ -278,6 +280,7 @@
                 setTimeout(function() {
                     bx_slider = $('.bxslider').bxSlider({
                         pagerCustom: '#bx-pager',
+                         controls:false,
                         onSlideBefore: function($slideElement, oldIndex, newIndex) {},
                         onSlideAfter: function($slideElement, oldIndex, newIndex) {
                             $('.zoomContainer').remove();

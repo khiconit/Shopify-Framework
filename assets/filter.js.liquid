@@ -1,5 +1,7 @@
 (function(){
+       'use strict';
     $(document).ready(function() {
+        
         $("#slider-range").slider({
             range: true,
             min: 500,
@@ -28,5 +30,16 @@
             }
         });
         $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+        $("#xxx").keyup(function(event) {
+            /* Act on the event */
+            var $val = $(this).val();
+            $.grep(json_collection, function($this,index){
+                    var matcher = new RegExp( $.ui.autocomplete.escapeRegex($val), "i" );
+                        if( matcher.test($this.title)){
+                        console.log($this.title);
+                        }
+            });
+            
+        });
     });
     })(jQuery);

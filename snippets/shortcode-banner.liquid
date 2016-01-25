@@ -1,11 +1,14 @@
 {% capture name %}{%include 'shortcode-render' render:'name' default:'banner.jpg'%}{% endcapture %}
 {% capture cols %}{%include 'shortcode-render' render:'cols' default:'6'%}{% endcapture %}
+{% capture banner_link %}{%include 'shortcode-render' render:'link' default:''%}{% endcapture %}
 {% if cols == 12  or cols == "12" %}
 	<div class="row">
 {% endif %}
-<div class="col-md-{{cols}} col-xs-12 shortcode-banner">
-	{{ name | asset_url | img_tag }}
+<div class="col-md-{{cols}} col-xs-12  col-sm-12 shortcode-banner">
+	<a href="{% if banner_link =='' %}{{name | file_url}}{%else%}{{banner_link}}{%endif%}" class="banner-link">
+		{{ name | file_url | img_tag }}
+	</a>
 </div>
 {% if cols == 12  or cols == "12" %}
 	</div>
-{% endif %}
+{% endif %} 

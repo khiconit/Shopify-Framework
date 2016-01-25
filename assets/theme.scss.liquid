@@ -951,6 +951,34 @@ $buttonFontColor: {{ settings.sbutton_color }};
 .shortcode-banner {
     overflow: hidden;
     margin: 20px 0px;
+    a.banner-link{
+        &:before{
+                 background-color: rgba(255,255,255,0.15);
+                content: "";
+                height: 0;
+                left: 0;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                transition: all 0.3s ease-out 0s;
+                -webkit-transition: all 0.3s ease-in-out 0s;
+                -ms-transition: all 0.3s ease-in-out 0s;
+                width: 0;
+          }
+          &:after{
+                    background-color: rgba(255,255,255,0.15);
+                    bottom: 0;
+                    content: "";
+                    height: 0;
+                    position: absolute;
+                    right: 0;
+                    transition: all 0.3s ease-out 0s;
+                    -webkit-transition: all 0.3s ease-in-out 0s;
+                    -ms-transition: all 0.3s ease-in-out 0s;
+                    width: 0;
+          }
+        }
+    
     img {
         max-width: 100%;
         transition: 1.5s;
@@ -960,4 +988,13 @@ $buttonFontColor: {{ settings.sbutton_color }};
     }
 
   }
- 
+ .zoomContainer {
+    z-index: 9999;
+}
+#search-results{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999999;
+    background: #fff;
+}

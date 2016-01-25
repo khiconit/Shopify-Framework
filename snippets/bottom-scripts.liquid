@@ -3,10 +3,8 @@
   <!-- Remove if not using Nivoslidedr -->
   {{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
   <!-- end -->
-  {% if template contains 'collection' %}
-     {{ 'jquery-ui.min.js' | asset_url | script_tag }}
-     {{ 'filter.js' | asset_url | script_tag }}
-  {% endif %}
+  {{ 'jquery-ui.min.js' | asset_url | script_tag }}
+
    {{"//cdnjs.cloudflare.com/ajax/libs/flexslider/2.2.2/jquery.flexslider.js"  |  script_tag }}
   {% unless template contains 'compare' %}
   {{'jquery.storageapi.min.js' | asset_url | script_tag }}
@@ -21,6 +19,10 @@
   {{ 'fastclick.min.js' | asset_url | script_tag }}
   {{ 'timber.js' | asset_url | script_tag }}
   {{ 'script.js' | asset_url | script_tag }}
+  {% if template contains 'collection' %}
+     {{ 'filter.js' | asset_url | script_tag }}
+  {% endif %}
+  {{'search-ajax.js' | asset_url | script_tag }}
   {% comment %}
   Template-specific js
   {% endcomment %}
