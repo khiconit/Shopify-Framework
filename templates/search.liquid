@@ -25,8 +25,8 @@
 {% endcomment %}
 {% paginate search.results by 10 %}
 
-  <div class="grid">
-    <div class="grid__item large--two-thirds push--large--one-sixth">
+  <div class="container">
+    <div class="row">
 
       {% if search.performed %}
         {% if search.results_count == 0 %}
@@ -42,9 +42,9 @@
 
       {% if search.performed %}
 
-        <hr class="hr--clear">
+        <hr class="clearfix">
 
-        <div class="grid-uniform">
+        <div class="list-items-search">
           {% for item in search.results %}
             {% comment %}
               Check if the product is on sale and set a variable to be used below.
@@ -64,13 +64,13 @@
 
             {% if grid_results == false %}
               <!-- begin list search results-->
-              <div class="grid__item">
-                <div class="grid">
+              <div class="search-items row">
+                <div class="item-product ">
                   {% if item.featured_image %}
                     {% comment %}
                       We have a featured_image, so it's likely a product
                     {% endcomment %}
-                    <div class="grid__item one-third">
+                    <div class="product-image col-md-4">
                       <a href="{{ item.url }}" title="{{ item.title | escape }}">
                         {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
                       </a>
@@ -80,7 +80,7 @@
                   {% comment %}
                     If we don't have a featured_image, add a push-- class to keep the alignment the same
                   {% endcomment %}
-                  <div class="grid__item two-thirds {% unless item.featured_image %}push--one-third{% endunless %}">
+                  <div class="product-info {% unless item.featured_image %}push--one-third{% endunless %} col-md-8">
                     <h3>{{ item.title | link_to: item.url }}</h3>
 
                     {% if item.price %}
@@ -125,7 +125,7 @@
               <!-- //list search results-->
             {% else %}
               <!-- begin grid search results-->
-              <div class="grid__item search-result large--one-third medium--one-third">
+              <div class="row search-result">
                 {% if item.featured_image %}
                   <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
                     {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
@@ -165,7 +165,7 @@
               </div>
               <!-- //grid search results-->
             {% endif %}
-
+              <div class="clearfix"></div>
           {% endfor %}
         </div>
 

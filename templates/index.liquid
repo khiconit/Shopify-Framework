@@ -40,26 +40,26 @@
 <div class="" id="slier-homepage">
   {% include 'slider'%}
 </div>
-<!-------------------- END CONTENT MAIN -->
+<!-- END CONTENT MAIN -->
 <div class="clearfix"></div>
 <div class="">
-  <!-------------------- START SLIDEBAR LEFT -->
+  <!-- START SLIDEBAR LEFT -->
   {% if settings.use_slidebar_left %}
   <div class="col-lg-{{settings.slidebar_ld_width}} col-md-{{settings.slidebar_ltb_width}}" id="silderbar-home-left">
     {% include 'render-layout' register_section: 'home_layout_sidebar_left'  %}
   </div>
   {% endif %}
-  <!-------------------- END SLIDEBAR LEFT -->
+  <!-- END SLIDEBAR LEFT -->
   <div class="col-lg-{{main_content_width_d}} col-md-{{main_content_width_t}}" id="content-main">
     {% include 'render-layout' register_section: 'home_layout_content'  %}
   </div>
-  <!-------------------- START SLIDEBAR RIGHT -->
+  <!--START SLIDEBAR RIGHT -->
   {% if settings.use_slidebar_right %}
   <div class="col-lg-{{settings.slidebar_rd_width}} col-md-{{settings.slidebar_rtb_width}}" id="silderbar-home-right">
     {% include 'render-layout' register_section: 'home_layout_sidebar_right'  %}
   </div>
   {% endif %}
-  <!-------------------- END SLIDEBAR RIGHT -->
+  <!-- END SLIDEBAR RIGHT -->
 </div>
 <div class="clearfix"></div>
 <div class="" id="bottom">
@@ -69,6 +69,3 @@
  
 
 
-{% for product in collections['test-2'] %}
-    {{product | json }}
-{%endfor %}

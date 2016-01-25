@@ -1,5 +1,5 @@
 (function(){
-       'use strict';
+       'use strict'; 
     $(document).ready(function() {
         
         $("#slider-range").slider({
@@ -15,31 +15,27 @@
                 var max_price = ui.values[1];
                 var min_price = ui.values[0];
                 var check = 1;
-                json_collection.map(function(index, elem) {
+                $("#list-product").empty();
+                $.each(json_collection,function(index, elem) {
                     if (check <= 10) {
-                        console.log(index.price);
-                        if (index.price <= max_price && index.price >= min_price) {
-                            console.log(index);
+                        if (elem.price <= max_price && elem.price >= min_price) {
+                            search_html(elem);
                         }
                     }
                     check++;
-                })
+                });
+                
                 window.setTimeout(function() {
                     $("#loading").hide(400);
                 }, 1000);
             }
         });
+        function search_html(data){
+            var $html = '<div class="col-md-3"><img src="'+data.images[0]+'" width="200" /> </div>';
+            $html  = $html + '<div class="col-md-9"> <a href="/products/'+data.handle+'"> <h4> '+data.title+'  </h4> </a> <p> Price <strong >'+data.price+'</strong> </p> <p> '+data.description+' </p></div>';
+            $html = '<div class="row"><div class="search_item"> '+$html+'  </div> </div>';
+            $("#list-product").append($html);
+        }
         $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-        $("#xxx").keyup(function(event) {
-            /* Act on the event */
-            var $val = $(this).val();
-            $.grep(json_collection, function($this,index){
-                    var matcher = new RegExp( $.ui.autocomplete.escapeRegex($val), "i" );
-                        if( matcher.test($this.title)){
-                        console.log($this.title);
-                        }
-            });
-            
-        });
     });
     })(jQuery);

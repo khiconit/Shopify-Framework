@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    var json_collection ={};
+</script>
   {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'  |  script_tag }}  
   {{ 'modernizr.min.js' | asset_url | script_tag }}
   <!-- Remove if not using Nivoslidedr -->
@@ -10,7 +13,7 @@
   {{'jquery.storageapi.min.js' | asset_url | script_tag }}
   {% endunless %} 
   {% if template contains "compare" %}
-  {{'compare.js' | asset_url | script_tag }}
+    {{'compare.js' | asset_url | script_tag }} 
   {% endif %}
   {{ 'sweetalert.min.js' | asset_url | script_tag  }}
   {{ 'jquery.bxslider.min.js' | asset_url | script_tag }}

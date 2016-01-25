@@ -5,9 +5,8 @@
 {% paginate collection.products by 12 %}
 
 {% include 'breadcrumb' %}
-<input type="text" name="" value="" placeholder="" id="xxx">
 <div class="container">
-  <div class="row">
+  <div class="row" >
     <div class="col-md-3 hiden-sm">
      
       <div class="range">
@@ -45,7 +44,7 @@
           </div>
         </header>
       {% endif %}
-      <div class="row">
+      <div class="row" id="list-product">
         {% for product in collection.products %}
           <div class="col-md-3 col-sm-6 col-xs-12">
         {% include 'product-single' %}
