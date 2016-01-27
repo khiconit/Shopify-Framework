@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default" id="top-menu">
+  <div class="container-fluid">
+ <div class="navbar-text">
+  {{settings.header_text}}
+ </div>
+    <ul class="nav navbar-nav navbar-right"> 
+        <li id="fat-menu" class="dropdown"> 
+              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Account <span class="caret"></span> 
+              </a> 
+              <ul class="dropdown-menu" aria-labelledby="drop3"> 
+                <li><a href="/pages/compare">Compare</a></li> 
+                {% if customer %}
+                    <li><a href="/collections/wishlist">Wishlist</a></li>  
+                  {% else %}
+                  <li>{{ 'Log in' | customer_login_link }}</li>
+                  <li><a  data-toggle="modal" href='#modal-register'>Register</a></li>
+                {% endif %}
+             </ul>
+          </li>
+      </ul>
+          <ul class="nav navbar-nav navbar-right"> 
+            <li id="fat-menu" class="dropdown"> 
+                  <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Language <span class="caret"></span> 
+                  </a> 
+                  <ul class="dropdown-menu" aria-labelledby="drop3"> 
+                     <li><a href="#">Vietnames</a> </li>
+                     <li><a href="#">US</a> </li>
+                     <li><a href="#">CN</a> </li>
+
+                 </ul>
+              </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">  
+        {% include 'currency-picker' %}
+      </ul>
+  </div>
+</nav>

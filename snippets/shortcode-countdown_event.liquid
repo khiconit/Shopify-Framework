@@ -1,6 +1,7 @@
 {% assign time_event = settings.event_countdown_time | date: '%Y/%m/%e  %X '  %}
 {% capture  cols %}{% include 'shortcode-render' render:'cols' default:settings.event_countdown_col %}{% endcapture %}
 {% capture  time_event %}{% include 'shortcode-render' render:'time' default:time_event %}{% endcapture %}
+{% capture use_description %}{% include 'shortcode-render' render:'description' default:settings.event_countdown_show_description  %}{% endcapture %}
 {% capture collection_name %}{% include 'shortcode-render' render:'collection' default:settings.event_countdown_collection  %}{% endcapture %}
 {% unless collection_name =='' %}
 {% assign event_count = 0   %}
@@ -42,7 +43,9 @@
 							<div class="content-right col-md-7 pull-right">
 							<div class="product-text">
 								<h2><a class="product-title" href="{{ product.url | within: collection }}" title="">{{ product.title }} </a></h2>
+								{% if use_description %}
 								<p class="event-description">{{ product.description | truncatewords: 100  | strip_html }}</p>
+								{% endif %}
 								<div class="product-price  ">
 									  {% comment %}
 									      You can show a leading 'from' or 'up to' by checking 'product.price_varies'

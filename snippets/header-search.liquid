@@ -1,14 +1,37 @@
-<div id="search_top" class="col-xs-12 col-sm-12 col-md-6 col-lg-3 pull-right">
-    <span id="search-icon" class="fa fa-search" title=""></span>
+ 
+    
     <form id="searchbox" class="popup-content" action="/search" method="get" role="search">
-        <input type="hidden" name="type" value="product">
-        <input id="search-ajax" class="search_query form-control" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-        <button id="search_button" class="btn btn-sm" type="submit" >
-            <span><i class="fa fa-search"></i></span>
-            <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
-        </button>
+        
+        <div class="col-xs-3">
+            <select class="form-control" id="categories-search">
+                <option  >All categories</option>
+                  <optgroup label="Vendors">
+                    {% for product_type in shop.types %}
+                      <option value="{{product_type}}" data-type="product_type">{{product_type}}</option>
+                    {% endfor %}
+                  </optgroup>
+                  <optgroup label="Product type">
+                    {% for product_vendor in shop.vendors %}
+                      <option value="{{ product_vendor  }}" data-type="vendor">{{ product_vendor  }}</option>
+                    {% endfor %}
+                  </optgroup>
+            </select>
+        </div>
+        <div class="col-xs-9">
+             <div class="form-group">
+                <input type="hidden" name="type" value="product" id="search-type">
+                <label class="sr-only" for="exampleInputAmount">Search product</label>
+                <div class="input-group">
+                  <div class="input-group-addon"> <span id="search-icon" class="fa fa-search" title=""></span></div>
+                <input id="search-ajax" class="search_query form-control" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+                 <div class="input-group-addon">
+                     <button id="search_button" class="btn btn-sm" type="submit" >
+                        <span><i class="fa fa-search"></i></span>
+                        <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+                    </button>
+                 </div>
+                </div>
+            </div>
+        </div>
     </form>
-    <div id="search-results">
-    	
-    </div>
-</div>
+    <div id="search-results"></div>

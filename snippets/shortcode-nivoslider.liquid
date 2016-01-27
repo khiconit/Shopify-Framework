@@ -8,7 +8,7 @@
         	{% assign slide_caption  = 'slide' | append : i | append :'_title' %}
             {%  if settings[slide_enable]  %}
                 <img src="{{  slide_handle  | asset_url }}" alt=""  title="{% if settings[slide_caption] !=""  %}#{{slide_caption}}{% endif %}"  {% if settings.home_use_controlNavThumbs %}  data-thumb="{{  slide_handle  | asset_url  }}"  {% endif %}/>
-            {% endif %}
+            {% endif %} 
         {% endfor %}
     </div>
     {% assign num = 10 %}

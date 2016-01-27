@@ -33,6 +33,16 @@
 
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
+<script src="https://cdn.localizejs.com/localize.js"></script>
+<script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+
+<script>
+ Localize.initialize({
+  key: 'QXo2X9MCu0mJr',
+  rememberLanguage: true
+ });
+</script>
+
 </head>
 
 {% comment %}
@@ -46,39 +56,8 @@ Add the page template as a class for easy page or template specific styling.
   	{% assign layout_widths = 'container-box' %}
   	{% assign layout_width = 'container' %}
   {% endif %}
-<nav class="navbar navbar-default" id="top-menu">
-  <div class="container-fluid">
- <p class="navbar-text"><i class="fa fa-shopping-basket"></i><marquee align="center" direction="left" scrollamount="4" width="300" behavior="alternate">  Shopify framework Develop by RDCMA</marquee></p>
-    <ul class="nav navbar-nav navbar-right"> 
-        <li id="fat-menu" class="dropdown"> 
-              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Account <span class="caret"></span> 
-              </a> 
-              <ul class="dropdown-menu" aria-labelledby="drop3"> 
-                <li><a href="/pages/compare">Compare</a></li> 
-                {% if customer %}
-                    <li><a href="/collections/wishlist">Wishlist</a></li>  
-                  {% else %}
-                  <li>{{ 'Log in' | customer_login_link }}</li>
-                  <li><a   data-toggle="modal" href='#modal-register'>Register</a></li>
-                {% endif %}
-             </ul>
-          </li>
-      </ul>
-          <ul class="nav navbar-nav navbar-right"> 
-            <li id="fat-menu" class="dropdown"> 
-                  <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Language <span class="caret"></span> 
-                  </a> 
-                  <ul class="dropdown-menu" aria-labelledby="drop3"> 
-                     <li><a href="#">Vietnames</a> </li>
-                     <li><a href="#">US</a> </li>
-                     <li><a href="#">CN</a> </li>
 
-                 </ul>
-              </li>
-      </ul>
-  </div>
-</nav>
- {% include  'header-search'  %}
+
   <div class="{{layout_widths}}">
      <div class="{{layout_width}}">
 
@@ -127,5 +106,6 @@ Add the page template as a class for easy page or template specific styling.
     {% include 'modal-register'  %}
     <!--  Script will import in snippets/bottom-scripts.liqu-->
     {% include 'bottom-scripts' %}
+    {% include 'currencies' %}
 </body>
 </html>

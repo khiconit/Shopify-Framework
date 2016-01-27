@@ -15,6 +15,48 @@
         "content": "Review [Timber's documentation](http:\/\/shopify.github.io\/Timber\/) for any development help."
     }]
 }, {
+    "name": "Header",
+    "settings": [{
+        "type": "header",
+        "content": "Logo"
+    }, {
+        "type": "checkbox",
+        "id": "logo_use_image",
+        "label": "Use custom logo"
+    }, {
+        "type": "image",
+        "id": "logo.png",
+        "label": "Custom logo",
+        "max-width": 450,
+        "max-height": 200,
+        "info": "Maximum logo dimensions are 450px wide by 200px high. The uploaded file will be resized to fit within those constraints."
+    }, {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Max logo width",
+        "default": "450",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+    }, {
+        "type": "header",
+        "content": "Favicon"
+    }, {
+        "type": "checkbox",
+        "id": "favicon_enable",
+        "label": "Use custom icon"
+    }, {
+        "type": "image",
+        "id": "favicon.png",
+        "label": "16 x 16px png",
+        "max-width": 16,
+        "max-height": 16
+    }, {
+        "type": "textarea",
+        "id": "header_text",
+        "label": "Header text",
+        "default": "<a class=\"fa fa-envelope\" href=\"mailto:demo@yourdomian.com?Subject=Hello%20again\" target=\"_top\">\n    <p>demo@yourdomian.com<\/p>\n<\/a>\n<a class=\"fa fa-phone\">\n    <p>(84) 123-123-123<\/p>\n<\/a>",
+        "info": "Empty if you want."
+    }]
+}, {
     "name": "Colors",
     "settings": [{
         "type": "color",
@@ -1464,6 +1506,17 @@
     }, {
         "type": "link_list",
         "id": "menu_nav_choose",
+        "label": "Main Navigation",
+        "default": "main-menu"
+    }, {
+        "type": "checkbox",
+        "id": "menu_use_vertical",
+        "label": "Use menu Vertical",
+        "default": false,
+        "info": "Check if you use Vertical menu ."
+    }, {
+        "type": "link_list",
+        "id": "menu_vertical_choose",
         "label": "Main Navigation",
         "default": "main-menu"
     }, {
@@ -6555,6 +6608,11 @@
         "default": "2",
         "info": "Number product will display on row in the event box"
     }, {
+        "type": "checkbox",
+        "id": "event_countdown_show_description",
+        "label": "Show description",
+        "default": true
+    }, {
         "type": "header",
         "content": "Animation settings"
     }, {
@@ -6691,91 +6749,38 @@
 
     }]
 }, {
-    "name": "Block Currrencies",
+    "name": "Currency",
     "settings": [{
+        "type": "paragraph",
+        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://docs.shopify.com/support/settings/general/tell-my-script-where-to-find-money-formats)."
+    }, {
         "type": "checkbox",
         "id": "show_multiple_currencies",
-        "label": "Allow shopper to see prices in his own currency?"
-    }, {
-        "type": "paragraph",
-        "content": "Although you will be able to display prices on your store front in different currencies, Shopify will still process orders in your shop's currency."
+        "label": "Enable currency conversion",
+        "default": true,
+        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
     }, {
         "type": "select",
         "id": "currency_format",
-        "label": "Money format",
+        "label": "Format",
         "options": [{
             "value": "money_format",
-            "label": "Without Currency, ex: $10.00"
+            "label": "Without currency ($10.00)"
         }, {
             "value": "money_with_currency_format",
-            "label": "With Currency, ex: $10 CAD"
+            "label": "With currency ($10.00 CAD)"
         }],
-        "default": "money_format"
+        "default": "money_with_currency_format"
     }, {
         "type": "text",
-        "id": "supported_currencies_1",
-        "label": "Currencies 1 you wish to support",
+        "id": "supported_currencies",
+        "label": "Supported currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
+    }, {
+        "type": "text",
+        "id": "default_currency",
+        "label": "Default currency",
         "default": "USD"
-    }, {
-        "type": "image",
-        "id": "currencies_img_1.png",
-        "label": "Currencies 1 icon",
-        "max-width": 16,
-        "max-height": 11,
-        "info": "Size: 16px x 11px"
-    }, {
-        "type": "text",
-        "id": "supported_currencies_2",
-        "label": "Currencies 2 you wish to support",
-        "default": "EUR"
-    }, {
-        "type": "image",
-        "id": "currencies_img_2.png",
-        "label": "Currencies 2 icon",
-        "max-width": 16,
-        "max-height": 11,
-        "info": "Size: 16px x 11px"
-    }, {
-        "type": "text",
-        "id": "supported_currencies_3",
-        "label": "Currencies 3 you wish to support",
-        "default": "AUD"
-    }, {
-        "type": "image",
-        "id": "currencies_img_3.png",
-        "label": "Currencies 3 icon",
-        "max-width": 16,
-        "max-height": 11,
-        "info": "Size: 16px x 11px"
-    }, {
-        "type": "text",
-        "id": "supported_currencies_4",
-        "label": "Currencies 4 you wish to support",
-        "default": "GBP"
-    }, {
-        "type": "image",
-        "id": "currencies_img_4.png",
-        "label": "Currencies 4 icon",
-        "max-width": 16,
-        "max-height": 11,
-        "info": "Size: 16px x 11px"
-    }, {
-        "type": "text",
-        "id": "supported_currencies_5",
-        "label": "Currencies 5 you wish to support",
-        "default": "JPY"
-    }, {
-        "type": "image",
-        "id": "currencies_img_5.png",
-        "label": "Currencies 5 icon",
-        "max-width": 16,
-        "max-height": 11,
-        "info": "Size: 16px x 11px"
-    }, {
-        "type": "paragraph",
-        "content": "Use the ISO 4217 3-letter currency code. Click [here](http:\/\/www.xe.com\/iso4217.php) for a complete list of currency codes. Example: USD."
-    }, {
-        "type": "paragraph",
-        "content": "* For this functionality to work in your shop, you are required to edit your money formats as per [these instructions](http:\/\/wiki.shopify.com\/How_to_Show_Multiple_Currencies#Do_tell_where_the_money_is) (“Do tell where the money is”)."
     }]
 }]

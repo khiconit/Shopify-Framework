@@ -2,6 +2,19 @@
 	'use strict';
 	
 	jQuery(document).ready(function($) {
+		var json_vendor =null ;
+		var json_product_type =null;
+		var curent_select = '';
+		$("#categories-search").on('change',function(){
+           var $val = $(this).find('option[value="'+$(this).val()+'"]').data('type');
+           curent_select = $val; 
+           $("#search-type").val('product:'+$val);
+           if('product_type' == $val ){$val = 'types'}else{$val = 'vendors'}
+           $.get('/collections/'+$val,{q:$(this).val(),view:'ajax'},function(response){
+           		response =  jQuery.parseJSON(response);
+           		if('types' == $val ){json_product_type = response;   }else{json_vendor = response; }
+           });
+        });
         window.setTimeout(function(){
             $.ajax({
                 url: '/collections/all',
@@ -10,10 +23,11 @@
                 success:function(response){
                     json_collection =  jQuery.parseJSON(response);
                 }
-            });
+            }); 
         },3000); 
+        //Ai  lam template thi html config o function search
         function search_html(data){
-			var $html = '<div class="col-md-3"><img src="'+data.images[0]+'" width="60" /> </div>';
+		var $html = '<div class="col-md-3"><img src="'+data.images[0]+'" width="60" /> </div>';
 			$html  = $html + '<div class="col-md-9"> <a href="/products/'+data.handle+'"> <h4> '+data.title+'  </h4> </a> <p> Price <strong >'+data.price+'</strong> </p></div>';
 			$html = '<div class="row"><div class="search_item"> '+$html+'  </div> </div>';
 			$("#search-results").append($html);
@@ -28,12 +42,25 @@
 			var check = 0;
 			if($val.trim() == '') {return false;}
             $current_search = setTimeout(function(){
-            	$.grep(json_collection, function($this,index){
+            	var data_search = {};
+            	if( 'vendor' == curent_select ){
+            		data_search = json_vendor;
+            	}else if( 'product_type' == curent_select ){ 
+            		data_search = json_product_type;
+            	}else{
+            		data_search = json_collection; 
+            	}
+            	var check_empty = true;
+            	$.grep(data_search, function($this,index){
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex($val), "i" );
                     if( matcher.test($this.title)){
                         search_html($this);
+                        check_empty = false;
                     }
             	});
+            	if(check_empty){
+            		$("#search-results").html('<div class="row"> <p> No results </p> </div>');
+            	}
             },1000);
 		});
 
